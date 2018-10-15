@@ -18,14 +18,16 @@ const FormContainer = styled.form`
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin-top: 20px;
 `
 
 const FormControl = styled.div`
   display: flex;
   flex-direction:column;
   box-sizing: border-box;
-  width: 30%;
-  margin-bottom: 12px;
+  width: 45%;
+  max-width: 400px;
+  margin-bottom: 22px;
   @media (max-width: 699px) {
       width: 55%;
   }
@@ -33,8 +35,8 @@ const FormControl = styled.div`
 
 const FormInput = styled.input`
   border: none;
-  border-bottom: 1px solid #f1f1f1;
-  border-radius: 2px;
+  border-bottom: 3px solid #f1f1f1;
+  border-radius: 7px;
   padding: 3px 6px;
   font-size: 14px;
   margin-top: 3px;
@@ -52,7 +54,7 @@ const FormTextArea = styled.textarea`
   font-size: 14px;
   margin-top: 3px;
   background: transparent;
-  border: 1px solid #f1f1f1;
+  border: 3px solid #f1f1f1;
   &:focus {
     padding: 5px 8px;
     outline: 3px solid azure;
@@ -68,7 +70,7 @@ const FormLabel = styled.label`
 const Button = styled.button`
   padding: 8px 15px;
   border-radius: 5px;
-  border: 1px solid white;
+  border: 2px solid white;
   background: transparent;
   font-size: 16px;
   margin-top: 20px;
@@ -79,6 +81,7 @@ const Button = styled.button`
 `
 
 const Text = styled.p`
+  font-weight: 700;
   @media (max-width: 699px) {
       max-width: 230px;
       text-align: center
@@ -103,7 +106,7 @@ class Contact extends React.Component {
     handleSubmit = e => {
         e.preventDefault();
         const form = e.target;
-        fetch("/contact?no-cache=1", {
+        fetch("/contact?no-cache=1", { // fix form submission issue
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: encode({

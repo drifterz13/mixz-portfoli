@@ -29,7 +29,7 @@ const Works = ({ works }) => {
     return (
         <Container>
             <Fade>
-                <h2>Works</h2>
+                <h2 style={{ borderBottom: '5px solid cornflowerblue', height: 'fit-content ' }}>Works</h2>
                 <Items>
                     {works.map(work => {
                         const { project: { childMarkdownRemark: { html, id } } } = work

@@ -107,6 +107,10 @@ class Contact extends React.Component {
                     netlify
                     data-netlify='true'
                     data-netlify-honeypot='bot-field'>
+                    <input type="hidden" name="form-name" value="file" />
+                    <p hidden>
+                        <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+                    </p>
                     <FormControl>
                         <FormLabel htmlFor='name'>Name</FormLabel>
                         <FormInput 

@@ -73,7 +73,7 @@ const Button = styled.button`
   margin-top: 20px;
   cursor: pointer;
   &:hover {
-    outline: ${({ isDisabled }) => isDisabled ? 'none' : '3px solid azure'}
+    outline: 3px solid azure;
   }
 `
 
@@ -84,95 +84,52 @@ const Text = styled.p`
   }
 `
 
-const encode = (data) => {
-    return Object.keys(data)
-        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-        .join("&");
-}
-
-class Contact extends React.Component {
-    state = {
-        name: '',
-        email: '',
-        detail: ''
-    }
-
-    handleChange = e => this.setState({[e.target.name]: e.target.value})
-
-    handleSubmit = e => {
-        fetch("/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: encode({ "form-name": "contact", ...this.state })
-        })
-            .then(() => alert("Success!"))
-            .catch(error => alert(error));
-
-        e.preventDefault();
-    };
-
-    render() {
-        const { name, email, detail } = this.state
-        const disabled = !name || !email || !detail
-        return (
-            <Container>
-                <h2>Contact</h2>
-                <Text>{this.props.contact}</Text>
-                <FormContainer 
-                    name="contact" 
-                    method="post" 
-                    data-netlify="true" 
-                    data-netlify-honeypot="bot-field"
-                    onSubmit={this.handleSubmit}
-                >
-                    <input type="hidden" name="form-name" value="contact" />
-                    <p hidden>
-                        <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-                    </p>
-                    <FormControl>
-                        <FormLabel htmlFor='name'>Name</FormLabel>
-                        <FormInput 
-                            type='text' 
-                            id='name' 
-                            name='name' 
-                            value={name} 
-                            placeholder='John Doe'
-                            onChange={this.handleChange}
-                        />
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel htmlFor='email'>Email</FormLabel>
-                        <FormInput 
-                            type='email' 
-                            id='email' 
-                            name='email' 
-                            value={email} 
-                            placeholder='example@example.com'
-                            onChange={this.handleChange}
-                        />
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel htmlFor='detail'>Detail</FormLabel>
-                        <FormTextArea 
-                            type='text' 
-                            id='detail' 
-                            name='detail' 
-                            value={detail} 
-                            placeholder='Something so good!'
-                            onChange={this.handleChange}
-                        />
-                    </FormControl>
-                    <Button
-                        type='submit'
-                        isDisabled={disabled}
-                        disabled={disabled}
-                    >
-                    Send
-                    </Button>
-                </FormContainer>
-            </Container>
-        ) 
-    }
+const Contact = ({ contact }) => {
+    return (
+        <Container>
+            <h2>Contact</h2>
+            <Text>{contact}</Text>
+            <FormContainer
+                name="contact"
+                method="post"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+            >
+                <input type="hidden" name="form-name" value="contact" />
+                <p hidden>
+                    <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+                </p>
+                <FormControl>
+                    <FormLabel htmlFor='name'>Name</FormLabel>
+                    <FormInput
+                        type='text'
+                        id='name'
+                        name='name'
+                        placeholder='John Doe'
+                    />
+                </FormControl>
+                <FormControl>
+                    <FormLabel htmlFor='email'>Email</FormLabel>
+                    <FormInput
+                        type='email'
+                        id='email'
+                        name='email'
+                        placeholder='example@example.com'
+                    />
+                </FormControl>
+                <FormControl>
+                    <FormLabel htmlFor='message'>Message</FormLabel>
+                    <FormTextArea
+                        type='text'
+                        id='message'
+                        name='message'
+                        placeholder='Something so good!'
+                    />
+                </FormControl>
+                <Button type='submit'>Send</Button>
+            </FormContainer>
+        </Container>
+    )
 }
 
 export default Contact

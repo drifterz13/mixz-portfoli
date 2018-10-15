@@ -140,7 +140,6 @@ class Contact extends React.Component {
                         />
                     </FormControl>
                     <Button 
-                        type='button'
                         isDisabled={disabled}
                         disabled={disabled}
                     >

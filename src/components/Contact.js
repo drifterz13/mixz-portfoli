@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { navigate } from 'gatsby'
 
 const Container = styled.div`
     display: flex;
@@ -84,52 +85,92 @@ const Text = styled.p`
   }
 `
 
-const Contact = ({ contact }) => {
-    return (
-        <Container>
-            <h2>Contact</h2>
-            <Text>{contact}</Text>
-            <FormContainer
-                name="contact"
-                method="post"
-                data-netlify="true"
-                data-netlify-honeypot="bot-field"
-            >
-                <input type="hidden" name="form-name" value="contact" />
-                <p hidden>
-                    <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-                </p>
-                <FormControl>
-                    <FormLabel htmlFor='name'>Name</FormLabel>
-                    <FormInput
-                        type='text'
-                        id='name'
-                        name='name'
-                        placeholder='John Doe'
-                    />
-                </FormControl>
-                <FormControl>
-                    <FormLabel htmlFor='email'>Email</FormLabel>
-                    <FormInput
-                        type='email'
-                        id='email'
-                        name='email'
-                        placeholder='example@example.com'
-                    />
-                </FormControl>
-                <FormControl>
-                    <FormLabel htmlFor='message'>Message</FormLabel>
-                    <FormTextArea
-                        type='text'
-                        id='message'
-                        name='message'
-                        placeholder='Something so good!'
-                    />
-                </FormControl>
-                <Button type='submit'>Send</Button>
-            </FormContainer>
-        </Container>
-    )
+function encode(data) {
+    return Object.keys(data)
+        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+        .join("&");
+}
+
+class Contact extends React.Component {
+    state = {
+
+    }
+
+    handleChange = e => {
+        this.setState({[e.target.name]: e.target.value })
+    }
+
+    handleSubmit = e => {
+        e.preventDefault();
+        const form = e.target;
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: encode({
+                "form-name": form.getAttribute("name"),
+                ...this.state
+            })
+        })
+            .then(() => navigate(form.getAttribute("action")))
+            .catch(error => alert(error));
+    }
+
+    render() {
+        return (
+            <Container>
+                <h2>Contact</h2>
+                <Text>{this.props.contact}</Text>
+                <FormContainer
+                    name="contact"
+                    method="post"
+                    data-netlify="true"
+                    data-netlify-honeypot="bot-field"
+                    action="/thanks/"
+                    onSubmit={this.handleSubmit}
+                >
+                    {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
+                    <input type="hidden" name="form-name" value="contact" />
+                    <p hidden>
+                        <label>
+                            Don’t fill this out:{" "}
+                            <input name="bot-field" onChange={this.handleChange} />
+                        </label>
+                    </p>
+                    <FormControl>
+                        <FormLabel htmlFor='name'>Name</FormLabel>
+                        <FormInput
+                            type='text'
+                            id='name'
+                            name='name'
+                            placeholder='John Doe'
+                            onChange={this.handleChange}
+                        />
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel htmlFor='email'>Email</FormLabel>
+                        <FormInput
+                            type='email'
+                            id='email'
+                            name='email'
+                            placeholder='example@example.com'
+                            onChange={this.handleChange}
+                        />
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel htmlFor='message'>Message</FormLabel>
+                        <FormTextArea
+                            type='text'
+                            id='message'
+                            name='message'
+                            placeholder='Something so good!'
+                            onChange={this.handleChange}
+                        />
+                    </FormControl>
+                    <Button type='submit'>Send</Button>
+                </FormContainer>
+            </Container>
+        )
+    }
 }
 
 export default Contact

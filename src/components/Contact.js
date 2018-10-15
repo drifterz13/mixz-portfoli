@@ -23,7 +23,7 @@ const FormControl = styled.div`
   display: flex;
   flex-direction:column;
   box-sizing: border-box;
-  width: 40%;
+  width: 30%;
   margin-bottom: 12px;
   @media (max-width: 699px) {
       width: 55%;
@@ -41,7 +41,7 @@ const FormInput = styled.input`
   &:focus {
     border-bottom: none;
     padding: 5px 8px;
-    outline-color: azure;
+    outline: 3px solid azure;
   }
 `
 
@@ -54,11 +54,11 @@ const FormTextArea = styled.textarea`
   border: 1px solid #f1f1f1;
   &:focus {
     padding: 5px 8px;
-    outline-color: azure;
+    outline: 3px solid azure;
   }
 `
 
-const FormLabel = styled.div`
+const FormLabel = styled.label`
   margin-bottom: 5px;
   font-weight: bold;
   font-size: 16px;
@@ -73,8 +73,7 @@ const Button = styled.button`
   margin-top: 20px;
   cursor: pointer;
   &:hover {
-    padding: ${({ isDisabled }) => isDisabled ? '8px' : '10px'};
-    font-size: ${({ isDisabled }) => isDisabled ? '16px' : '18px'}
+    outline: ${({ isDisabled }) => isDisabled ? 'none' : '3px solid azure'}
   }
 `
 

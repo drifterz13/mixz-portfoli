@@ -65,7 +65,7 @@ const FormLabel = styled.div`
 `
 
 const Button = styled.button`
-  padding: 8px;
+  padding: 8px 15px;
   border-radius: 5px;
   border: 1px solid white;
   background: transparent;
@@ -101,18 +101,11 @@ class Contact extends React.Component {
             <Container>
                 <h2>Contact</h2>
                 <Text>{this.props.contact}</Text>
-                <form 
+                <FormContainer 
                     name="contact" 
                     method="post" 
                     data-netlify="true" 
                     data-netlify-honeypot="bot-field"
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        width: '100%',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}
                 >
                     <input type="hidden" name="form-name" value="contact" />
                     <p hidden>
@@ -158,7 +151,7 @@ class Contact extends React.Component {
                     >
                     Send
                     </Button>
-                </form>
+                </FormContainer>
             </Container>
         ) 
     }

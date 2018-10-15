@@ -1,5 +1,3 @@
-import '../assets/css/index.css'
-
 import React from 'react'
 import Img from 'gatsby-image'
 
@@ -9,10 +7,11 @@ const Picture = styled(Img)`
     width: 190px;
     height: 190px;
     border-radius: 10px;
+    margin-bottom: 0
     cursor: pointer;
     @media (max-width: 699px) {
-        width: 90px;
-        height: 90px;
+        width: 120px;
+        height: 120px;
     }
 `
 

@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Default Starter',
+    title: `Mix's Portfolio`,
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -23,6 +23,14 @@ module.exports = {
         accessToken: '7c47f17ce70637904cce08c834c3388c97b1d5d938824212398c889db7d4c6fa',
         host: 'localhost:8000'
       },
+    },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `Roboto\:400,700`
+        ]
+      }
     },
     'gatsby-plugin-offline',
     'gatsby-transformer-remark',

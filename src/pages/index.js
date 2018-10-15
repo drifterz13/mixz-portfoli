@@ -1,5 +1,3 @@
-import '../assets/css/index.css'
-
 import React from 'react'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
@@ -9,6 +7,7 @@ import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import Works from '../components/Work';
 import About from '../components/About';
+import Layout from '../components/layout'
 
 const Title = styled.h1`
   position: absolute;
@@ -50,7 +49,7 @@ const IndexPage = ({ data: { allContentfulPortfolio } }) => {
   const { node } = edges[0]
   const { title, background ,about, profilePricture, works, contact, footer, madeBy  } = node
   return (
-    <div>
+    <Layout>
       <Hero fluid={background.fluid} />
       <Title>{title.title}</Title>
       <Container>
@@ -62,8 +61,7 @@ const IndexPage = ({ data: { allContentfulPortfolio } }) => {
         <Contact contact={contact.contact} />
         <Footer words={footer} logos={madeBy} />
       </Fade>
-      
-    </div>
+    </Layout>
   )
 }
 

@@ -84,6 +84,12 @@ const Text = styled.p`
   }
 `
 
+const encode = (data) => {
+    return Object.keys(data)
+        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+        .join("&");
+}
+
 class Contact extends React.Component {
     state = {
         name: '',
@@ -92,6 +98,18 @@ class Contact extends React.Component {
     }
 
     handleChange = e => this.setState({[e.target.name]: e.target.value})
+
+    handleSubmit = e => {
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: encode({ "form-name": "contact", ...this.state })
+        })
+            .then(() => alert("Success!"))
+            .catch(error => alert(error));
+
+        e.preventDefault();
+    };
 
     render() {
         const { name, email, detail } = this.state
@@ -105,6 +123,7 @@ class Contact extends React.Component {
                     method="post" 
                     data-netlify="true" 
                     data-netlify-honeypot="bot-field"
+                    onSubmit={this.handleSubmit}
                 >
                     <input type="hidden" name="form-name" value="contact" />
                     <p hidden>

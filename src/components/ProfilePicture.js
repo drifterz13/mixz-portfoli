@@ -17,7 +17,6 @@ const Picture = styled(Img)`
 `
 
 const ProfilePicture = ({ profilePicture }) => {
-    console.log(profilePicture)
     return (
         <Picture 
             alt='profile-picture' 

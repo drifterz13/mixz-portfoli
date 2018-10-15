@@ -101,13 +101,20 @@ class Contact extends React.Component {
             <Container>
                 <h2>Contact</h2>
                 <Text>{this.props.contact}</Text>
-                <FormContainer 
-                    name='contact' 
-                    method='POST' 
-                    netlify
-                    data-netlify='true'
-                    data-netlify-honeypot='bot-field'>
-                    <input type="hidden" name="form-name" value="file" />
+                <form 
+                    name="contact" 
+                    method="post" 
+                    data-netlify="true" 
+                    data-netlify-honeypot="bot-field"
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}
+                >
+                    <input type="hidden" name="form-name" value="contact" />
                     <p hidden>
                         <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
                     </p>
@@ -151,7 +158,7 @@ class Contact extends React.Component {
                     >
                     Send
                     </Button>
-                </FormContainer>
+                </form>
             </Container>
         ) 
     }

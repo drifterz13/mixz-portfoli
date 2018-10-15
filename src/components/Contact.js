@@ -25,6 +25,9 @@ const FormControl = styled.div`
   box-sizing: border-box;
   width: 40%;
   margin-bottom: 12px;
+  @media (max-width: 699px) {
+      width: 55%;
+  }
 `
 
 const FormInput = styled.input`
@@ -75,6 +78,13 @@ const Button = styled.button`
   }
 `
 
+const Text = styled.p`
+  @media (max-width: 699px) {
+      max-width: 230px;
+      text-align: center
+  }
+`
+
 class Contact extends React.Component {
     state = {
         name: '',
@@ -90,8 +100,12 @@ class Contact extends React.Component {
         return (
             <Container>
                 <h2>Contact</h2>
-                <p>{this.props.contact}</p>
-                <FormContainer>
+                <Text>{this.props.contact}</Text>
+                <FormContainer 
+                    name='contact' 
+                    method='post' 
+                    data-netlify='true' 
+                    data-netlify-honeypot='bot-field'>
                     <FormControl>
                         <FormLabel htmlFor='name'>Name</FormLabel>
                         <FormInput 

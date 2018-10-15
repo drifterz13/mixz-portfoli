@@ -37,6 +37,13 @@ const Hero = styled(Img)`
   }
 `
 
+const Seperator = styled.hr`
+  width: 60%;
+  @media (max-width: 699px) {
+    width: 100%;
+  }
+`
+
 
 const IndexPage = ({ data: { allContentfulPortfolio } }) => {
   const { edges} = allContentfulPortfolio
@@ -48,6 +55,7 @@ const IndexPage = ({ data: { allContentfulPortfolio } }) => {
       <Title>{title.title}</Title>
       <Container>
         <About about={about} profilePicture={profilePricture} />
+        <Seperator />
         <Works works={works} />
       </Container>
       <Fade>

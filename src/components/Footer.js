@@ -18,6 +18,7 @@ const FooterContainer = styled.footer`
   align-items: center;
   padding: 40px;
   font-size: 18px;
+  text-align: center;
 `
 
 const Footer = ({ words, logos }) => (

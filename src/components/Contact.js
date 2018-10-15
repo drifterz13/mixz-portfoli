@@ -105,7 +105,8 @@ class Contact extends React.Component {
                     name='contact' 
                     method='POST' 
                     netlify
-                >
+                    data-netlify='true'
+                    data-netlify-honeypot='bot-field'>
                     <FormControl>
                         <FormLabel htmlFor='name'>Name</FormLabel>
                         <FormInput 
@@ -144,7 +145,7 @@ class Contact extends React.Component {
                         isDisabled={disabled}
                         disabled={disabled}
                     >
-                    Submit
+                    Send
                     </Button>
                 </FormContainer>
             </Container>
